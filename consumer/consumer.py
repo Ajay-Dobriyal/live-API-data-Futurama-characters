@@ -17,7 +17,7 @@ TEXT_STORE_PATH = os.path.join(RAG_DIR, "text_store.json")
 TOPIC = "live_news"
 KAFKA_BOOTSTRAP = "localhost:9092"
 
-print("🔁 Starting consumer...")
+print(" Starting consumer...")
 
 consumer = KafkaConsumer(
     TOPIC,
@@ -29,7 +29,7 @@ consumer = KafkaConsumer(
 )
 
 # Embedding model
-print("🔄 Loading embedding model (sentence-transformers)...")
+print(" Loading embedding model (sentence-transformers)...")
 embed_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Load or init FAISS index
@@ -37,7 +37,7 @@ vector_store = None
 if os.path.exists(FAISS_INDEX_PATH):
     try:
         vector_store = faiss.read_index(FAISS_INDEX_PATH)
-        print("✅ Loaded existing FAISS index.")
+        print(" Loaded existing FAISS index.")
     except Exception as e:
         print("⚠ Could not load FAISS index:", e)
 
@@ -52,7 +52,7 @@ def save_text_db():
     with open(TEXT_STORE_PATH, "w", encoding="utf-8") as f:
         json.dump(text_db, f, ensure_ascii=False, indent=2)
 
-print("📥 Listening for messages... (Ctrl+C to stop)")
+print(" Listening for messages... (Ctrl+C to stop)")
 
 try:
     for msg in consumer:
@@ -61,7 +61,7 @@ try:
         if not text:
             continue
 
-        print("📌 Consumed:", text)
+        print(" Consumed:", text)
 
         # Simple chunking - split into 300-char pieces
         chunks = [text[i:i+300] for i in range(0, len(text), 300)]
@@ -71,10 +71,10 @@ try:
             dim = len(vectors[0])
             vector_store = faiss.IndexFlatL2(dim)
             vector_store.add(np.array(vectors).astype("float32"))
-            print("🆕 Created new FAISS index with first documents.")
+            print(" Created new FAISS index with first documents.")
         else:
             vector_store.add(np.array(vectors).astype("float32"))
-            print("➕ Added documents to FAISS index.")
+            print(" Added documents to FAISS index.")
 
         # Save chunk texts to JSON to map back later
         text_db.extend(chunks)
@@ -82,7 +82,7 @@ try:
 
         # persist FAISS index on disk
         faiss.write_index(vector_store, FAISS_INDEX_PATH)
-        print("💾 FAISS saved.\n")
+        print(" FAISS saved.\n")
 
 except KeyboardInterrupt:
     print("Stopping consumer...")
