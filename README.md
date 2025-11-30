@@ -36,9 +36,8 @@ docker-compose up -d producer
 docker-compose up -d consumer
 python -m query.ask_rag
 streamlit run app.py
+![image](image/image.png) 
 
-
-<img src="https://raw.githubusercontent.com/username/repo/branch/images/my_image.png" width="1906" height="996" alt="image" />
 
 
 
