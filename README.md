@@ -27,3 +27,15 @@ cd real_time_rag_project
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+docker-compose up -d zookeeper
+docker-compose up -d kafka
+docker exec -it kafka kafka-topics.sh --create --topic my_topic --bootstrap-server kafka:9092
+docker exec -it kafka kafka-console-producer.sh --topic my_topic --bootstrap-server kafka:9092
+docker exec -it kafka kafka-console-consumer.sh --topic my_topic --from-beginning --bootstrap-server kafka:9092
+docker-compose up -d producer
+docker-compose up -d consumer
+python -m query.ask_rag
+streamlit run app.py
+
+
+
