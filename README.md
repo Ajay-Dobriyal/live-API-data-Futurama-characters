@@ -27,3 +27,4 @@ cd real_time_rag_project
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+![image](image/image.png) 
