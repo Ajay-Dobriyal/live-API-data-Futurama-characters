@@ -36,7 +36,7 @@ docker-compose up -d producer
 docker-compose up -d consumer
 python -m query.ask_rag
 streamlit run app.py
-![My Image](https://raw.githubusercontent.com/Ajay-Dobriyal/live-API-data-Futurama-characters/main/image/image.png)
+
 
 
 
