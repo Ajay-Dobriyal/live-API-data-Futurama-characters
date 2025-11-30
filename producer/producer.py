@@ -32,7 +32,7 @@ def convert_item_to_text(item):
     text = f"Name: {name}. Species: {species}. Occupation: {occupation}."
     return text
 
-print("▶ Producer started. Fetching API and producing to Kafka...")
+print(" Producer started. Fetching API and producing to Kafka...")
 
 while True:
     items = fetch_api_data()
@@ -51,5 +51,5 @@ while True:
             print("Produce error:", e)
 
     producer.flush()
-    print("⏳ Waiting 30 seconds before next fetch...\n")
+    print(" Waiting 30 seconds before next fetch...\n")
     time.sleep(30)
