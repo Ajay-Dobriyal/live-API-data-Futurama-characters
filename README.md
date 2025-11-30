@@ -38,4 +38,6 @@ python -m query.ask_rag
 streamlit run app.py
 
 
+<img width="1906" height="996" alt="image" src="https://github.com/user-attachments/assets/cd9859c2-8b81-4ac3-9528-698609e0d58a" />
+
 
