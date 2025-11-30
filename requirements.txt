@@ -1,0 +1,7 @@
+kafka-python
+requests
+sentence-transformers
+faiss-cpu
+ollama
+langchain
+numpy
