@@ -36,7 +36,9 @@ docker-compose up -d producer
 docker-compose up -d consumer
 python -m query.ask_rag
 streamlit run app.py
-![image](image/image.png) 
+![My Image](image/image.png)
+
+
 
 
 
